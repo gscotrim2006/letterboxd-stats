@@ -1,0 +1,36 @@
+@use '../../../styles/variables' as *;
+
+// Passa as variáveis SCSS para CSS variables para o color-mix funcionar
+:host {
+  --accent-orange: #{$color-accent-orange};
+  --accent-green: #{$color-accent-green};
+  --accent-blue: #{$color-accent-blue};
+  --accent-white: #{$color-white};
+  --color-bg-header: #{$color-bg-header};
+  --color-bg-main: #{$color-bg-main};
+  --color-text: #{$color-text};
+  --accent-gray-map: #{$color-accent-gray-map};
+
+  background-color: var(--color-bg-header);
+  display: block;
+}
+
+.sidenav-links{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+a{
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-text);
+  //background-color: var(--accent-gray-map);
+  margin: 5px;
+  padding: 10px 5px;
+}
+
+a:hover{
+  color: var(--accent-orange);
+}

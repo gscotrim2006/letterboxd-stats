@@ -1,3 +1,17 @@
+@use '../styles/variables' as *;
+
+// Passa as variáveis SCSS para CSS variables para o color-mix funcionar
+:host {
+  --accent-orange: #{$color-accent-orange};
+  --accent-green: #{$color-accent-green};
+  --accent-blue: #{$color-accent-blue};
+  --accent-white: #{$color-white};
+  --color-bg-header: #{$color-bg-header};
+  --color-bg-main: #{$color-bg-main};
+  --color-text: #{$color-text};
+  --accent-gray-map: #{$color-accent-gray-map};
+}
+
 .layout{
   display: grid;
   grid-template-areas:
@@ -16,7 +30,7 @@ app-header{
 
 app-sidenav{
   grid-area: menu;
-  background-color: aquamarine;
+  background-color: var(--color-bg-header);
 }
 
 main{
