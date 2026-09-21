@@ -1,0 +1,53 @@
+@use '../../../styles/variables' as *;
+
+// Passa as variáveis SCSS para CSS variables para o color-mix funcionar
+:host {
+  --accent-orange: #{$color-accent-orange};
+  --accent-green: #{$color-accent-green};
+  --accent-blue: #{$color-accent-blue};
+  --accent-white: #{$color-white};
+  --color-bg-header: #{$color-bg-header};
+  --color-bg-main: #{$color-bg-main};
+  --color-text: #{$color-text};
+  --accent-gray-map: #{$color-accent-gray-map};
+}
+
+.full-logo{
+  display: flex;
+  justify-content: center;
+  color: var(--accent-white);
+  align-items: center;
+  padding: 15px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  color: var(--accent-white);
+}
+
+.logo-text{
+  font-size: 36px;
+}
+
+.tri {
+  width: 0;
+  height: 0;
+  border-left: 30px solid;
+  border-bottom: 20px solid transparent;
+  margin: 15px -5px;
+  transform: rotate(-90deg) scaleY(-1) ;
+}
+
+.tri-orange{
+  border-left-color: var(--accent-orange);
+}
+
+.tri-green{
+  border-left-color: var(--accent-green);
+}
+
+.tri-blue{
+  border-left-color: var(--accent-blue);
+  margin: 15px 10px 15px -5px;
+}
