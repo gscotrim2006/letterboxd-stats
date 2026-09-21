@@ -1,5 +1,8 @@
-<p>home works!</p>
-<input type="file" (change)="onFileSelected($event)" accept=".csv">
+<input type="file" id="input-file" (change)="onFileSelected($event)" accept=".csv">
+
+<label for="input-file" class="button-customized">
+  Choose file
+</label>
 
 <br><br>
 @if (totalCount() > 0) {
@@ -15,10 +18,13 @@
 }
 <br><br>
 
-@if (stateService.movies().length > 0) {
-  <button (click)="enrichMovies()" >Search movies information</button>
+@if (stateService.movies().length > 0 && !stateService.stats_data()) {
+  <p>{{ stateService.movies().length }} movies loaded</p>
+  <button (click)="enrichMovies()" class="enrich-button" >Search movies information</button>
   
+  <!--
   @for (movie of stateService.movies(); track movie.title + movie.release_year) {
     <li>{{ movie.title }}</li>
   }
+  -->
 }

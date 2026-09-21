@@ -5,6 +5,13 @@
   --accent-orange: #{$color-accent-orange};
   --accent-green: #{$color-accent-green};
   --accent-blue: #{$color-accent-blue};
+  --accent-white: #{$color-white};
+  --color-bg-header: #{$color-bg-header};
+  --color-bg-main: #{$color-bg-main};
+  --color-text: #{$color-text};
+  --accent-gray-map: #{$color-accent-gray-map};
+
+  color: var(--accent-white);
 }
 
 .progress-track {
@@ -21,4 +28,33 @@
   border-radius: 10px;
   /* Transição suave tanto para o preenchimento quanto para a cor */
   transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+input{
+  display: none;
+}
+
+.button-customized,
+.enrich-button {
+  background-color: var(--accent-green);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--accent-orange);
+  }
+}
+
+.button-customized {
+  margin-top: 10px;
+}
+
+.enrich-button {
+  margin: 10px 0;
 }
