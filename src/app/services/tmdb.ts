@@ -30,7 +30,20 @@ export class TmdbService {
   }
 
   enrichMovie(movie: Movie): Observable<Movie> {
-    return this.searchMovie(movie.title, movie.release_year).pipe(
+    const year = Number(movie.release_year);
+
+    const searchWithYearFallback = this.searchMovie(movie.title, movie.release_year).pipe(
+      switchMap(res => {
+        if(res.results?.length) return of(res);
+        return this.searchMovie(movie.title, year-1);
+      }),
+      switchMap(res => {
+        if(res.results?.length) return of(res);
+        return this.searchMovie(movie.title, year+1);
+      })
+    );
+
+    return searchWithYearFallback.pipe(
       // switchMap transforma um valor emitido em um novo Observable e cancela automaticamente a requisição ou inscrição anterior se um novo valor chegar antes do término;
       switchMap(response => {
         if (!response.results.length) { // checa se array esta vazio;
@@ -48,6 +61,6 @@ export class TmdbService {
         // Retorna o filme original sem alterações para não quebrar o fluxo;
         return of(movie);
       })
-    );
+    )
   }
 }
