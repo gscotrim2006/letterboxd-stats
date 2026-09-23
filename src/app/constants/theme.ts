@@ -6,4 +6,8 @@ export const THEME = {
   text: '#F3F5F6',
   bgHeader: '#14181C',
   grayMap: '#7b7f83',
+
+  gold: '#FFD700',
+  silver: '#C0C0C0',
+  bronze: '#CD7F32',
 } as const;

@@ -1,16 +1,17 @@
-@if (stateService.stats_data()) {
-  @for (t of top4; track t.term) {
-    <li>
+<h2>YOUR TOP 20 DIRECTORS</h2>
+
+<div class="top4-grid">
+  @for (t of top4; track t.term; let i = $index) {
+    <div class="card" [class]="'rank-' + (i + 1)">
       <img [src]="t.profilePath || 'assets/profile_avatar_placeholder.png'">
-      {{ t.term }}: {{ t.count }}
-    </li>
+      <p>{{ t.term }}</p>
+      <p>{{ t.count }} films</p>
+    </div>
   }
+</div>
 
-  <br>
-
-  @for (r of rest; track r.term) {
-      <li>
-        {{ r.term }}: {{ r.count }}
-      </li>
+<ul class="rest-grid">
+  @for (r of rest; track r.term; let i = $index) {
+    <li>{{ i + 5 }}. {{ r.term }} — {{ r.count }} films</li>
   }
-}
+</ul>

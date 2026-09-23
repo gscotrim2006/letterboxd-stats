@@ -1,0 +1,69 @@
+@use '../../../styles/variables' as *;
+
+:host {
+  --accent-gold: #{$color-gold};
+  --accent-silver: #{$color-silver};
+  --accent-bronze: #{$color-bronze};
+  --color-text: #{$color-text};
+}
+
+
+h2{
+  padding-top: 50px;
+}
+
+.top4-grid{
+  display: grid;
+  max-width: 900px; // limita o tamanho total
+  margin: 50px auto;   // centraliza
+  gap: 10px;
+  grid-template-columns: 1fr 0.9fr 0.8fr 0.8fr;
+  align-items: center;
+}
+
+.top4-grid img{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4; 
+  object-fit: cover;
+  object-position: top;
+}
+
+.card {  
+  display: flex;
+  flex-direction: column;
+
+  &.rank-1 {
+    border: 3px solid var(--accent-gold);
+  }
+  
+  &.rank-2 {
+    border: 3px solid var(--accent-silver);
+  }
+  
+  &.rank-3, &.rank-4 {
+    border: 3px solid var(--accent-bronze);
+  }
+}
+
+.card p {
+  padding: 5px;
+  text-align: center;
+  margin: 0;
+}
+
+.rest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  gap: 0 40px; 
+  
+  list-style: none;
+  padding: 0;
+  margin-bottom: 50px;
+  
+  li {
+    padding: 4px 0;
+    color: var(--color-text);
+  }
+}
