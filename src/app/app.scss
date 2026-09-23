@@ -17,20 +17,19 @@
   grid-template-areas:
     "header header"
     "menu content";
-  grid-template-columns: 1fr 3fr;
-  gap: 3px;
-  background-color: dodgerblue;
-  padding: 5px;
+  grid-template-columns: 180px 1fr;
 }
 
 app-header{
+  background-color: var(--color-bg-header);
   grid-area: header;
   text-align: center;
 }
 
 app-sidenav{
   grid-area: menu;
-  background-color: var(--color-bg-header);
+  background-color: var(--accent-gray-map);
+  padding: 2px;
 }
 
 main{

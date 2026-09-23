@@ -9,6 +9,7 @@
   --color-bg-header: #{$color-bg-header};
   --color-bg-main: #{$color-bg-main};
   --color-text: #{$color-text};
+  --accent-light-gray: #{$color-accent-light-gray};
   --accent-gray-map: #{$color-accent-gray-map};
 
   color: var(--accent-white);
@@ -17,10 +18,12 @@
 .progress-track {
   width: 50%;
   height: 20px;
+  border: solid black 1px;
   border-radius: 10px;
-  background-color: $color-white;
+  background-color: var(--accent-light-gray);
   overflow: hidden;
   margin-inline: auto;
+
 }
 
 .progress-fill {
