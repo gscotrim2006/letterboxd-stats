@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { StatItem } from '../../models/movie.model';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import { State } from '../../services/state';
+import { THEME}  from '../../constants/theme';
 
 @Component({
   imports: [NgxEchartsDirective],
@@ -10,7 +11,7 @@ import { State } from '../../services/state';
   templateUrl: './genres.html',
 })
 export class Genres {
-  //@Input() genres: StatItem[] = [];
+  //@Input() genres: StatItem[] = []; -> migrou para StateService;
 
   readonly stateService = inject(State);
 
@@ -27,59 +28,30 @@ export class Genres {
   get chartOptions() {
     return {
       tooltip: { trigger: 'item' },
-      legend: { orient: 'vertical', right: '5%', top: 'center' },
+      legend: {
+        orient: 'vertical',
+        right: '5%',
+        top: 'center',
+        formatter: (name: string) => {
+          const item = this.stateService.stats_data()?.genres
+            .find(g => g.term === name);
+          return `${name}: ${item?.count ?? 0}`;
+        }
+      },
       series: [{
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
         label: { show: false },
         data: this.pieData  // usa o getter acima
-      }]
+      }],
+      color: [
+        THEME.orange, THEME.green, THEME.blue,
+        '#E63946', '#A8DADC', '#457B9D',
+        '#F4A261', '#2A9D8F', '#E9C46A',
+        '#264653', '#F72585', '#7209B7',
+        '#3A86FF', '#FB5607', '#8338EC'
+      ],
     };
   }
-
-  /*
-  const option = {
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      top: '5%',
-      left: 'center'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold'
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: [
-          { value: 1048, name: 'Search Engine' },
-          { value: 735, name: 'Direct' },
-          { value: 580, name: 'Email' },
-          { value: 484, name: 'Union Ads' },
-          { value: 300, name: 'Video Ads' }
-        ]
-      }
-    ]
-  }; */
 }
