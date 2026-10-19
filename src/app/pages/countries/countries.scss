@@ -1,0 +1,33 @@
+@use '../../../styles/variables' as *;
+
+// Passa as variáveis SCSS para CSS variables para o color-mix funcionar
+:host {
+  --accent-orange: #{$color-accent-orange};
+  --accent-green: #{$color-accent-green};
+  --accent-blue: #{$color-accent-blue};
+  --accent-white: #{$color-white};
+  --color-bg-header: #{$color-bg-header};
+  --color-bg-main: #{$color-bg-main};
+  --color-text: #{$color-text};
+  --accent-light-gray: #{$color-accent-light-gray};
+  --accent-gray-map: #{$color-accent-gray-map};
+
+  color: var(--accent-white);
+}
+
+.reset-zoom-btn{
+  background-color: var(--accent-green);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-bottom: 30px;
+
+  &:hover {
+    background-color: var(--accent-orange);
+  }
+}

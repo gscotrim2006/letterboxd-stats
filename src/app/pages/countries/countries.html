@@ -1,1 +1,2 @@
-<div echarts [options]="chartOptions()" style="height: 800px; width: 100%"></div>
+<div echarts [options]="chartOptions()" (chartInit)="onChartInit($event)" style="height: 90vh; width: 100%"></div>
+<button (click)="resetZoom()" class="reset-zoom-btn">Reset zoom</button>

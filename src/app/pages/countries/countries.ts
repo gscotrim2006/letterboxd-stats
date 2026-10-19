@@ -17,6 +17,8 @@ export class Countries implements OnInit {
 
   chartOptions = signal<any>({});
 
+  private chartInstance: echarts.ECharts | null = null;
+
   private mapRegistered = false;
 
   constructor() {
@@ -46,8 +48,14 @@ export class Countries implements OnInit {
     console.log('Countries data:', data);
     console.log('Data length:', data.length);
 
-    this.chartOptions.set({
-      title: { text: 'Movies Watched Around The World', left: 'center' },
+    const option: echarts.EChartsOption = {
+      title: { 
+        text: 'MOVIES WATCHED AROUND THE WORLD',
+        left: 'center',
+        textStyle: {
+          color: THEME.text
+        }
+      },
       visualMap: {
         type: 'piecewise',
         pieces: [
@@ -57,16 +65,55 @@ export class Countries implements OnInit {
           { min: 101, color: THEME.orange },
         ]
       },
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) => {
+          const value = isNaN(params.value) || params.value == null ? 0 : params.value; 
+          return `${params.name}: ${value} film${value !== 1 ? 's' : ''}`;
+        }
+      },
       series: [{
         type: 'map',
         map: 'world',
-        roam: true, // permite zoom e pan com mouse
+        roam: 'scale', // permite zoom + mapa fixo;
+        scaleLimit: {
+          min: 1.1,   // limite mínimo de afastamento
+          max: 4      // limite máximo de aproximação
+        },
         itemStyle: {
-        areaColor: THEME.grayMap,     // países sem dado
-        borderColor: THEME.text,   // fronteiras
-      },
+          areaColor: THEME.grayMap,  // países sem dado
+          borderColor: THEME.text,   // fronteiras
+        },
         data: data.map(item => ({ name: item.term, value: item.count }))
       }]
-    })
+    }
+
+    this.chartOptions.set(option);
+  }
+  
+
+  onChartInit(chart: echarts.ECharts): void {
+    this.chartInstance = chart;
+    
+    chart.on('georoam', (params: any) => {
+      if (params.zoom !== undefined) {
+        const currentOption = chart.getOption() as any;
+        const currentZoom = currentOption.series?.[0]?.zoom;
+        
+        if (currentZoom !== undefined && currentZoom <= 1) {
+          chart.setOption({
+            series: [{ zoom: 1, center: [0, 20] }]
+          });
+        }
+      }
+    });
+  }
+  
+  resetZoom(): void {
+    if (this.chartInstance) {
+      this.chartInstance.setOption({
+        series: [{ zoom: 1, center: undefined }]
+      });
+    }
   }
 }
