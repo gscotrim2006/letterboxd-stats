@@ -75,7 +75,7 @@ export class Countries implements OnInit {
       series: [{
         type: 'map',
         map: 'world',
-        roam: 'scale', // permite zoom + mapa fixo;
+        roam: true, // permite zoom + mapa livre;
         scaleLimit: {
           min: 1.1,   // limite mínimo de afastamento
           max: 4      // limite máximo de aproximação
